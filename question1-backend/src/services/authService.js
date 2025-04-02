@@ -12,19 +12,18 @@ const getAuthToken = async () => {
         console.log('Fetching new auth token...');
         try {
             const authUrl = `${config.testServerBaseUrl}/auth`;
-            // THIS PAYLOAD MUST MATCH THE /auth REQUEST BODY STRUCTURE
             const payload = {
                 email: config.userEmail,
-                name: config.userName,        // Ensure this field is included
+                name: config.userName,        
                 rollNo: config.rollNo,
                 accessCode: config.accessCode,
-                clientID: config.clientId,     // Key MUST be 'clientID'
-                clientSecret: config.clientSecret // Key MUST be 'clientSecret'
+                clientID: config.clientId,     
+                clientSecret: config.clientSecret 
             };
             const response = await makeRequest(authUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
-            }, payload); // Send the payload as the third argument
+            }, payload); 
 
             if (response.body.token_type === 'Bearer' && response.body.access_token) {
                 tokenCache.accessToken = response.body.access_token;
